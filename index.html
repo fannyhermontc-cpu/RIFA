@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulacro Hack Extremo</title>
+
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        background:black;
+        color:#00ffe0;
+        font-family:"Courier New", monospace;
+        overflow:hidden;
+        animation: flicker 1.5s infinite;
+    }
+
+    @keyframes flicker {
+        0% { opacity:1; }
+        10% { opacity:0.9; }
+        20% { opacity:0.6; }
+        30% { opacity:1; }
+        100% { opacity:1; }
+    }
+
+    canvas {
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        z-index:-3;
+    }
+
+    #skull {
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:url('https://i.ibb.co/WfGL9wz/skull-hack.png');
+        background-size:cover;
+        opacity:0.12;
+        z-index:-2;
+    }
+
+    #console {
+        position:absolute;
+        top:50px;
+        left:5%;
+        width:90%;
+        height:200px;
+        overflow:hidden;
+        white-space:pre-line;
+        font-size:14px;
+        color:#00fff2;
+        text-shadow:0 0 5px #00fdf2;
+    }
+
+    @media (min-width:600px){
+        #console { font-size:16px; }
+    }
+
+    .barra {
+        width:85%;
+        margin:20px auto;
+        height:20px;
+        border:2px solid #00fff2;
+        overflow:hidden;
+        display:none;
+    }
+    .relleno {
+        height:100%;
+        width:0%;
+        background:#00fff2;
+        box-shadow:0 0 10px #00fff2;
+        transition:width 0.2s linear;
+    }
+
+    #timer {
+        position:absolute;
+        top:40%;
+        width:100%;
+        text-align:center;
+        font-size:80px;
+        color:#ff0033;
+        text-shadow:0 0 20px red, 0 0 40px red;
+        display:none;
+        z-index:99999;
+        animation: glitch 0.2s infinite;
+    }
+
+    @media (min-width:600px){
+        #timer { font-size:150px; }
+    }
+
+    @keyframes glitch {
+        0% { transform: translate(0,0); }
+        25% { transform: translate(-5px,3px); }
+        50% { transform: translate(4px,-4px); }
+        75% { transform: translate(-3px,2px); }
+        100% { transform: translate(0,0); }
+    }
+
+    #ransom {
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:radial-gradient(#900, #000);
+        color:white;
+        display:none;
+        text-align:center;
+        padding-top:15%;
+        font-size:24px;
+        font-family:"Courier New";
+        text-shadow:0 0 10px red;
+        z-index:999999;
+    }
+
+    @media (min-width:600px){
+        #ransom { font-size:28px; }
+    }
+
+    #mensajeFinal {
+        display:none;
+        position:absolute;
+        top:10%;
+        left:5%;
+        width:90%;
+        padding:20px;
+        background:rgba(0,0,0,0.85);
+        border:2px solid #00ffe0;
+        border-radius:10px;
+        font-size:18px;
+        z-index:9999999;
+    }
+
+    @media (min-width:600px){
+        #mensajeFinal { font-size:22px; }
+    }
+
+    /* pequeño efecto de parpadeo cuando aparece el mensaje final */
+    .flash {
+        animation: flash 0.7s linear 0s 3;
+    }
+    @keyframes flash {
+        0% { opacity:1; filter: none; transform: none; }
+        50% { opacity:0.2; filter: blur(1px) hue-rotate(20deg); transform: translateX(2px); }
+        100% { opacity:1; filter: none; transform: none; }
+    }
+
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+<div id="skull"></div>
+
+<div id="console"></div>
+
+<div class="barra" id="barra1"><div class="relleno" id="relleno1"></div></div>
+<div class="barra" id="barra2"><div class="relleno" id="relleno2"></div></div>
+
+<div id="timer">10</div>
+
+<div id="ransom">
+    <h1>⚠ SISTEMA CIFRADO ⚠</h1>
+    <p>Tus archivos fueron bloqueados.</p>
+    <p>Restauración no disponible.</p>
+</div>
+
+<!-- MENSAJE FINAL (tu texto EXACTO) -->
+<div id="mensajeFinal">
+    <h2>⚠️ ALERTA CRÍTICA: NO PUEDES CONFIAR. TU SEGURIDAD HA QUEDADO EXPUESTA.</h2>
+    <p>
+        Caíste en algo que nunca debiste abrir.
+    </p>
+    <p>
+        Aprende de esto y entiende el riesgo real detrás de:
+    </p>
+    <ul>
+       <ul>
+  <ul>
+  <li>👾 No escanees QR desconocidos, muchos llevan a trampas ocultas.</li>
+  <li>💀 No abras enlaces enviados por números raros, pueden robar tu info.</li>
+  <li>⚡ Si alguien te pide dinero por mensaje, es fraude: ignora y bloquea.</li>
+  <li>🕶️ No caigas en “hackeos” falsos que buscan asustarte.</li>
+  <li>👾 Si se descarga un archivo solo, no lo abras: puede ser un troyano.</li>
+  <li>💀 No llenes formularios sospechosos que piden datos sensibles.</li>
+  <li>⚡ Desconfía de apps fuera de la tienda oficial; muchas son malware.</li>
+  <li>🕶️ No te conectes a Wi-Fi abiertas, es como dejar tu teléfono desnudo.</li>
+  <li>👾 Si un sitio no tiene https:// mejor salte antes de meter datos.</li>
+  <li>💀 Si recibes un código que no pediste, alguien intenta entrar a tu cuenta.</li>
+  <li>⚡ Nunca compartas contraseñas, códigos o fotos de tus tarjetas.</li>
+  <li>🕶️ Desconfía de “regalos gratis”, casi siempre es un cebo.</li>
+  <li>👾 No abras PDFs, ZIPs o APKs que no pediste.</li>
+  <li>💀 Jamás conectes USBs regalados o encontrados.</li>
+  <li>⚡ No aceptes ayuda técnica por chat; muchos se hacen pasar por soporte.</li>
+</ul>
+
+
+        <li></li>
+    </ul>
+</div>
+
+<!-- AUDIOS -->
+<audio id="alarma" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" autoplay muted></audio>
+<audio id="tecleo" src="https://www.fesliyanstudios.com/play-mp3/6685" autoplay muted loop></audio>
+<audio id="apagado" src="https://www.fesliyanstudios.com/play-mp3/6290" preload="auto"></audio>
+
+<!-- SONIDOS ADICIONALES (se reproducen en secuencia al final) -->
+<!-- GLITCH (Pixabay) -->
+<audio id="glitch" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1ff478d77e.mp3?filename=glitch-124476.mp3" preload="auto"></audio>
+<!-- ERROR CRÍTICO (Pixabay) -->
+<audio id="errorCritico" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f0e2616c2.mp3?filename=error-126627.mp3" preload="auto"></audio>
+<!-- COLAPSO / power down short (Pixabay) -->
+<audio id="colapso" src="https://cdn.pixabay.com/download/audio/2023/04/13/audio_aeb2d611f7.mp3?filename=power-down-short-146349.mp3" preload="auto"></audio>
+
+<script>
+
+window.addEventListener("load", () => {
+
+    const alarma = document.getElementById("alarma");
+    const tecleo = document.getElementById("tecleo");
+
+    alarma.muted = true;
+    tecleo.muted = true;
+
+    alarma.play().catch(()=>{});
+    tecleo.play().catch(()=>{});
+
+    setTimeout(() => {
+        try {
+            alarma.muted = false;
+            tecleo.muted = false;
+            alarma.play().catch(()=>{});
+            tecleo.play().catch(()=>{});
+        } catch(e) {}
+        vozRobotica("Sistema iniciado. Acceso no autorizado detectado.");
+    }, 600);
+
+});
+
+function vozRobotica(texto) {
+    if (!('speechSynthesis' in window)) return;
+    const voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = "es-MX";
+    voz.pitch = 0.3;
+    voz.rate = 0.95;
+    voz.volume = 1;
+    speechSynthesis.speak(voz);
+}
+
+/* CONSOLA */
+const consola = document.getElementById("console");
+const lineas = [
+    "[+] Iniciando análisis del sistema...",
+    "[+] Obteniendo permisos root...",
+    "[!] Vulnerabilidad detectada: CVE-2025-ERROR...",
+    "[+] Inyectando payload...",
+    "[+] Cifrando archivos...",
+    "[!] Sistema vulnerable...",
+    "[+] Ejecución remota completada...",
+    "[+] Descargando claves...",
+    "[+] Conexión establecida...",
+    "[!] Sistema comprometido...",
+    "[+] Escaneando puertos abiertos...",
+    "[+] Analizando paquetes entrantes...",
+    "[!] Actividad sospechosa detectada...",
+    "[+] Forzando autenticación...",
+    "[!] Token inválido — intentando bypass...",
+    "[+] Bypass exitoso...",
+    "[+] Montando particiones ocultas...",
+    "[+] Extrayendo metadatos...",
+    "[!] Integridad comprometida...",
+    "[+] Ejecutando script de rastreo...",
+    "[+] Obteniendo logs...",
+    "[!] Anomalía detectada...",
+    "[+] Insertando módulo oculto...",
+    "[+] Verificando kernel...",
+    "[!] Kernel modificado...",
+    "[+] Shell remota simulada...",
+    "[+] Canal seguro iniciado...",
+    "[!] Tráfico no cifrado detectado...",
+    "[+] Reescribiendo rutas...",
+    "[+] Limpieza de rastros...",
+    "[!] SISTEMA COMPROMETIDO..."
+];
+let i = 0;
+
+function imprimirConsola() {
+    if (i < lineas.length) {
+        consola.textContent += lineas[i] + "\n";
+        i++;
+        setTimeout(imprimirConsola, 200);
+    }
+}
+setTimeout(imprimirConsola, 700);
+
+function barraFake(id){
+    document.getElementById("barra"+id).style.display="block";
+    let r = document.getElementById("relleno"+id);
+    let w = 0;
+    let interval = setInterval(()=>{
+        w += Math.random()*12;
+        r.style.width = Math.min(100, w) + "%";
+        if(w >= 100){
+            clearInterval(interval);
+        }
+    }, 150);
+}
+setTimeout(()=>barraFake(1), 1500);
+setTimeout(()=>barraFake(2), 3000);
+
+setTimeout(()=>{
+    try { document.getElementById("alarma").play(); } catch(e){}
+    alert("⚠️ Tu sistema ha sido comprometido.");
+    vozRobotica("Tu sistema ha sido vulnerado.");
+}, 1500);
+
+setTimeout(()=>{
+    try { document.getElementById("alarma").play(); } catch(e){}
+    alert("Pago requerido de 500 pesos para restaurar acceso.");
+    vozRobotica("Pago requerido para recuperar el sistema.");
+}, 3500);
+
+function iniciarTimer() {
+    let tiempo = 10;
+    const t = document.getElementById("timer");
+    t.style.display = "block";
+    t.textContent = tiempo;
+    vozRobotica("Temporizador iniciado. " + tiempo + " segundos restantes.");
+
+    const interval = setInterval(() => {
+        tiempo--;
+        t.textContent = Math.max(0, tiempo);
+        if (tiempo <= 0) {
+            clearInterval(interval);
+            vozRobotica("Tiempo terminado.");
+            finalizarRansom();
+            return;
+        }
+        const unidad = (tiempo === 1) ? " segundo." : " segundos.";
+        vozRobotica(tiempo + unidad);
+    }, 1000);
+}
+setTimeout(iniciarTimer, 5000);
+
+function finalizarRansom() {
+    vozRobotica("Sistema completamente bloqueado.");
+    document.getElementById("ransom").style.display = "block";
+    setTimeout(apagadoTotal, 4000);
+}
+
+/* SECUENCIA SONORA AVANZADA: glitch -> errorCritico -> apagado -> colapso -> mostrar mensajeFinal */
+function apagadoTotal() {
+    vozRobotica("Apagando sistema.");
+
+    // reproducir sonidos en secuencia con pequeños retrasos
+    try {
+        const g = document.getElementById("glitch");
+        const e = document.getElementById("errorCritico");
+        const a = document.getElementById("apagado");
+        const c = document.getElementById("colapso");
+
+        // intentar play inmediato (algunos navegadores lo bloquean si no hay interacción)
+        g.currentTime = 0; g.play().catch(()=>{});
+        setTimeout(()=>{ e.currentTime = 0; e.play().catch(()=>{}); }, 300);
+        setTimeout(()=>{ a.currentTime = 0; a.play().catch(()=>{}); }, 800);
+        setTimeout(()=>{ c.currentTime = 0; c.play().catch(()=>{}); }, 1400);
+    } catch(err){}
+
+    try { document.getElementById("tecleo").pause(); } catch(e){}
+
+    // efecto visual de "apagado"
+    document.body.style.transition = "2.6s";
+    document.body.style.filter = "brightness(0)";
+
+    // después de un tiempo, restaurar brillo y mostrar mensaje final con efecto
+    setTimeout(()=>{
+        document.body.style.filter = "brightness(1)";
+        const msg = document.getElementById("mensajeFinal");
+        msg.classList.add("flash");
+        msg.style.display = "block";
+    }, 2000);
+}
+
+/* MATRIX */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
+const matrix = letters.split("");
+const fontSize = 10;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = [];
+for (let i = 0; i < columns; i++) drops[i] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "#00fff0";
+    ctx.font = fontSize + "px Courier";
+
+    if (Math.floor(canvas.width / fontSize) !== columns) {
+        columns = Math.floor(canvas.width / fontSize);
+        drops = [];
+        for (let i = 0; i < columns; i++) drops[i] = 1;
+    }
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+setInterval(draw, 35);
+
+</script>
+
+</body>
+</html>
